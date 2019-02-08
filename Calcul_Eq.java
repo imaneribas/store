@@ -54,7 +54,7 @@ public void actionPerformed(ActionEvent arg0) {
 		c=Double.parseDouble(T3.getText());
 		delta=b*b-4*a*c;
 		l7.setText(delta.toString());
-		
+		delta=b*b;
 	}
 	
 }
