@@ -41,17 +41,32 @@ public class Store {
 	}
 	}
 	private static void AddItem() {
-    JTextField name=new JTextField();		
-    JTextField ID=new JTextField();	
-    JTextField quantite=new JTextField();	
-    JTextField prix=new JTextField();	
-    JTextField type=new JTextField();
-    JTextField other=new JTextField();
-    Object [] Messages ={"Enter item name",name," Enter item Number", ID, " Enter item prix",
-    		prix," Enter item type",type," Enter item other",other};
+		    JTextField id=new JTextField();  
+		    JTextField name=new JTextField();			
+		    JTextField quan=new JTextField();	
+		    JTextField price=new JTextField();	
+		    JTextField type=new JTextField();
+		    JTextField nameType=new JTextField();
+		    JTextField palceandother=new JTextField();
+		    Object [] Messages ={" Enter item Number", id,"Enter item name",name," Enter item quantité",quan," Enter item prix",price," Enter item type of item (B)Book, (S)shoes, (G)Game ?",type};
     int yes_no =JOptionPane.showConfirmDialog(null,Messages);
+    if(yes_no==0){
+    	Object [] Book={"Enter Book Title : " ,nameType,"Enter booki author: ",palceandother };
+    	Object [] Game ={"Enter Game number: " ,nameType,"Enter place of manufacture: ",palceandother };
+    	Object [] Shoes={"Enter shoes number: " ,nameType,"Enter place of manufacture: ",palceandother };
+    	int result1=1,result2=1,result3=1;
+    	if(type.getText().toUpperCase().equals("B")){
+    		result1=JOptionPane.showConfirmDialog(null,Book);
+    		}
+    	if(type.getText().toUpperCase().equals("G")){
+    		result2=JOptionPane.showConfirmDialog(null,Game);
+    		}
+    	if(type.getText().toUpperCase().equals("S")){
+    		result3=JOptionPane.showConfirmDialog(null,Shoes);
+    		}
+    	
     }
     
 	}
-
+}
 
