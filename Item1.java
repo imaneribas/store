@@ -1,11 +1,11 @@
-package store;
+package store1;
 
-public class Item {
+public class Item1 {
 private int ID,quantite;
 private double prix;
 private String name,type,nameItem,Author;
 
-public Item(int id,int quant,double price,string name,string type,string nameItem,string Author) {
+public Item1(int id,int quant,double price,String name,String type,String nameItem,String Author) {
 	id=ID;
 	quantite=quant;
 	prix=price;

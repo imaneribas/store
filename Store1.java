@@ -1,11 +1,11 @@
-package store;
+package store1;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class Store {
+public class Store1 {
 
-	public static Item item[]=new item[20];
+	public static Item1 item[]=new Item1[20];
 	public static int  size=0;
 	public static void main(String[] args) {
 		mainMenu();
@@ -44,6 +44,8 @@ public class Store {
 	}}
 	}
 	private static void AddItem() {
+		int nu=-1;
+		do {
 		    JTextField id=new JTextField();  
 		    JTextField name=new JTextField();			
 		    JTextField quan=new JTextField();	
@@ -84,35 +86,42 @@ public class Store {
     			
     		}
     		if(index ==-1) {
-    			item[size]=new item(ID,Quan,PRICE,Name,TYPE,NAMETYPE,PLACE); 
+    			item[size]=new Item1(ID,Quan,PRICE,Name,TYPE,NAMETYPE,PLACE); 
     			size++;
-    			JOptionPane.showMessaageDialog(null, "bien saisi");
+    			JOptionPane.showMessageDialog(null, "bien saisi");
     		}
     	}
     		else {
     			JOptionPane.showMessageDialog(null, "existe deja");
     		}
     }
-    private static int searchIDITem(int ID) {
-    	for (int i=0;i<size;i++) {
-    		if(ID==item[i].getID()) {
+  
+    String re=JOptionPane.showInputDialog(null, "do you want add onother item 1/0");
+    nu=Integer.parseInt(re);
+    
+}while(nu == 1);} 
+	private static int searchNameItem(String name) {
+		// TODO Auto-generated method stub
+		for (int i=0;i<size;i++) {
+    		if(name.equals(item[i].getname())) {
     			return i;
     		}
     		
     	}
     	return -1;
     }
-    
-    
-    private static int searchNameItem(String Name) {
-    	for (int i=0;i<size;i++) {
-    		if(Name.equals(item[i].getName())) {
-    			return i;
-    		}
-    		
-    	}
-    	return -1;
-    }
-	}
+	
+	
+	private static int searchIDITem(int iD) {
+		
+		// TODO Auto-generated method stub
+		for (int i=0;i<size;i++) {
+		if(iD==item[i].getID()) {
+			return i;
+		}
+		}
+	
+	return -1;
 }
+	}
 
