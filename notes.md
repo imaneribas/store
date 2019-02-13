@@ -1,2 +1,1 @@
-Please next time don't delete the files, you can modify in order to see the differences.
-thank you.q
+s'il vous plaît ne supprimer pas les fichiers, vous pouvez modifier les fichiers existants afin de voir les différences.
