@@ -26,8 +26,8 @@ public class Store {
 	                 +"6 End shoping and go to checkout \n"
 				+"7 Empty Custmer shopping cart \n"
 	                 +"8 Exist the program";
-		int Num=Integer.parseInt(JOptionPane.showInputDialog(null,Menu));
-		switch(Num){
+		String Num=JOptionPane.showInputDialog(null,Menu);
+		int ch=Integer.parseInt(Num);switch(ch){
 		case 1:
 			AddItem();
 			break;
@@ -35,6 +35,7 @@ public class Store {
 			AddCustomer();
 			break;
 		case 3:
+			Addanitemcustomershoppingincart();
 			break;
 		case 4:
 			break;
@@ -50,6 +51,44 @@ public class Store {
 			break;
 	}}
 	}
+	private static void Addanitemcustomershoppingincart() {
+		int un=-1;
+		do{
+			String IDCustomer=JOptionPane.showInputDialog(null,"entrer numero customer");
+			int id=Integer.parseInt(IDCustomer);
+			int index=SearchIdCustomer(id);
+			if(index!=1) {
+				int no =addItemCart(index);
+				if(no==0) {
+					return;
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "no customer dispo");
+			}
+			String NumberYes=JOptionPane.showInputDialog(null, "do you want to try 1/0?");
+			un=Integer.parseInt(NumberYes);
+		}while(un==1);
+		
+	}
+	private static int addItemCart(int index) {
+		// TODO Auto-generated method stub
+		String data="the customer no:"+customer[index].getId()+",the customer name :"+customer[index].getName()+".\nIems in the store";
+		for (int i=0;i<size;i++) {
+			data+="\n "+(i+1)+"- "+item[i].getID()+" "+item[i].getname()+"  ["+item[i].getQuantite()+"]  \n" ;
+		}
+		data+=".....\n"
+		       +"0.Return to a main menu \n"
+		       +"entrer your item choice:";
+		String NumberChoose=JOptionPane.showInputDialog(null, data);
+		int numberChoose=Integer.parseInt(NumberChoose);
+		if(numberChoose==0) {
+		return 0;
+	}else{
+		
+	}
+		return index-1;
+	}
 	private static void AddItem() {
 		int nu=-1;
 		do {
@@ -63,7 +102,7 @@ public class Store {
 		    Object [] Messages ={" Enter item Number", id,"Enter item name",name," Enter item quantit�",quan," Enter item prix",price," Enter item type of item (B)Book, (S)shoes, (G)Game ?",type};
     int yes_no =JOptionPane.showConfirmDialog(null,Messages);
     if(yes_no==0){
-    	Object [] Book={"Enter Book Title : " ,nameType,"Enter book author: ",palceandother };
+    	Object [] Book={"Enter Book Title : " ,nameType,"Enter booki author: ",palceandother };
     	Object [] Game ={"Enter Game number: " ,nameType,"Enter place of manufacture: ",palceandother };
     	Object [] Shoes={"Enter shoes number: " ,nameType,"Enter place of manufacture: ",palceandother };
     	int result1=1;
@@ -89,7 +128,7 @@ public class Store {
     		int indexName=searchNameItem(Name);
     		if(indexName!=-1) {
     			item[indexName]. AddQuant(Quan); 
-    			JOptionPane.showMessageDialog(null, "nom existe deja quantité ajouté au stock");
+    			JOptionPane.showMessageDialog(null, "nom existe deja");
     			
     		}
     		if(index ==-1) {
@@ -113,14 +152,21 @@ public class Store {
     		if(name.equals(item[i].getname())) {
     			return i;
     		}
+    		
     	}
     	return -1;
     }
+	
+	
 	private static int searchIDITem(int iD) {
+		
+		// TODO Auto-generated method stub
 		for (int i=0;i<size;i++) {
 		if(iD==item[i].getID()) {
 			return i;
-		}}
+		}
+		}
+	
 	return -1;
 }
 	private static void AddCustomer() {
