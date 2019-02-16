@@ -1,5 +1,7 @@
 package store;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -10,6 +12,8 @@ public class Store {
 	public static int  [] cart=new int [10];
 	public static Customer [] customer=new Customer[20];
 	public static int size1=0;
+	public static Sale sale[]=new Sale[20];
+	public static int size2=0;
 	public static void main(String[] args) {
 		for(int i=0;i<cart.length;i++){
 			cart[i]=-1;
@@ -72,9 +76,13 @@ public class Store {
 		
 	}
 	private static int addItemCart(int index) {
+		int un=-1;
+		do {
 		// TODO Auto-generated method stub
 		String data="the customer no:"+customer[index].getId()+",the customer name :"+customer[index].getName()+".\nIems in the store";
+		 ArrayList<String> list=new ArrayList<>();
 		for (int i=0;i<size;i++) {
+			list.add(item[i].getname()); 
 			data+="\n "+(i+1)+"- "+item[i].getID()+" "+item[i].getname()+"  ["+item[i].getQuantite()+"]  \n" ;
 		}
 		data+=".....\n"
@@ -85,8 +93,37 @@ public class Store {
 		if(numberChoose==0) {
 		return 0;
 	}else{
+		String Choose="";
+		String nameItem="";
+		int Quan=0;
+		int idItem=1; 
+		for(int i=0;i<size;i++){
+		if(list.get(numberChoose-1).equals(item[i].getname())){
+		Quan=item[i].getQuantite();
+		idItem=item[i].getID();
+		nameItem=item[i].getname();
+		Choose="The item is ["+idItem+"   "+nameItem+"    ["+Quan+"]]  \\nEnter the required quantity:";
+		break;
 		
+		}
+		}
+		String Ch=JOptionPane.showInputDialog(null,Choose);
+		int quan=Integer.parseInt(Ch);
+		if(Quan>=quan && quan >0 && Quan!=0){
+			sale[size2]=new Sale(customer[index].getId(),idItem,Quan,nameItem);
+			int total=Quan-quan;
+			int IndexNameItem=searchNameItem(nameItem);
+			item[IndexNameItem].setQuantite(total);
+			size2++;
+			JOptionPane.showMessageDialog(null,"le produit est ajouté au chariot");
+			return -1;
+
+		}
+		String yes_no=JOptionPane.showInputDialog(null,"sorry the required quantity is not available, the available quantity is ["+Quan+"],try again! \n"+"Do you want add another item to shopping cart (y/n)?y");
+		un =Integer.parseInt(yes_no);
 	}
+	}while(un==1);
+	
 		return index-1;
 	}
 	private static void AddItem() {
