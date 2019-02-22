@@ -23,24 +23,6 @@ public class Item {
 		public int getQuantite() {
 			return quantite;
 		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public String getType() {
-			return type;
-		}
-		public void setType(String type) {
-			this.type = type;
-		}
-		public String getNameItem() {
-			return nameItem;
-		}
-		public void setNameItem(String nameItem) {
-			this.nameItem = nameItem;
-		}
 		public void setQuantite(int quantite) {
 			this.quantite = quantite;
 		}

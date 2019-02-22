@@ -42,10 +42,19 @@ public class Store {
 			Addanitemcustomershoppingincart();
 			break;
 		case 4:
+			String ID=JOptionPane.showInputDialog(null, "entrer num du customer");
+			int id=Integer.parseInt(ID);
+			RemoveanitemfromCustomershoppingcart(id);
 			break;
 		case 5:
+			String IDC=JOptionPane.showInputDialog(null, "entrer id");
+			 int idc=Integer.parseInt(IDC);
+			 Display(idc);
 			break;
 		case 6:
+			String iDc=JOptionPane.showInputDialog(null, "entrer id");
+			 int IDc=Integer.parseInt(iDc);
+			endshoppingandgotocheckout(IDc);
 			break;
 		case 7:
 			break;
@@ -54,6 +63,109 @@ public class Store {
 			System.exit(0);
 			break;
 	}}
+	}
+	private static void endshoppingandgotocheckout(int id) {
+		// TODO Auto-generated method stub
+		if(-1 !=SearchIdCustomer(id)) {
+			Display(id);
+			for(int i=0;i<size1;i++) {
+				if(id==customer[i].getId()) {
+					for(int j=i;j<size1;j++) {
+						if(size1-1==j) {
+							size1--;
+							JOptionPane.showMessageDialog(null, "delete success");
+							break;
+					}customer[i]=customer[i+1];
+					}
+					
+				}
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "customer doesn t exist");
+		
+			
+		}
+		
+	}
+	private static void Display(int id) {
+		// TODO Auto-generated method stub
+		if(-1 !=SearchIdCustomer(id)) {
+			int TOTAL=0;
+			String Data="item no item name quantity quantityprice totalprice";
+			for(int i=0;i<size2;i++) {
+				int qu=sale[i].getQuan();
+				int index=searchNameItem(sale[i].getNameItem());
+				int Total=(int) (qu*item[index].getPrix());
+				TOTAL+=Total;
+						Data=" \n     "+sale[i].getIdItem()+"         "+sale[i].getNameItem()+"          "+qu+"            "+item[index].getPrix()+"           "+Total;
+			}
+			Data=" \n\n     prix"+TOTAL;
+			JOptionPane.showMessageDialog(null, Data);
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "customer doesn t exist");
+		}
+		
+	}
+	private static void RemoveanitemfromCustomershoppingcart(int id) {
+		// TODO Auto-generated method stub
+		int searchId=SearchIdCustomer(id);
+		if(searchId != - 1) {
+			ArrayList<String> nameItemSale=new ArrayList<>();
+			ArrayList<Integer> indexSale=new ArrayList<>();
+			String data="the customer no:"+customer[searchId].getId()+",the customer name : "+customer[searchId].getName()+"\n";
+		    for(int i=0;i<size2;i++) {
+		    	if(id==sale[i].getIdCustomer()) {
+		    		nameItemSale.add(sale[i].getNameItem());
+		    		indexSale.add(i);
+		    		data+="\n "+(i+1)+"- "+sale[i].getIdItem()+" "+sale[i].getNameItem()+"  ["+sale[i].getQuan()+"]  \n" ;
+		    	}
+		    }
+		    String data1="hat do you want to modify?\n"
+		    		+"R.Remove item from the shopping cart \n"
+		    		+"M.Return to the main menu\n"
+		    		+"entrer your choice [RRemove, M main Menu] \n";
+		    String ch =JOptionPane.showInputDialog(null, data+"\n"+data1);
+		    if(ch.toUpperCase().equals("M")) {
+		    	return;
+		    	
+		    }else if(ch.toUpperCase().equals("R")) {
+		    	String CH=JOptionPane.showInputDialog(null, data); 
+		    	int Ch=Integer.parseInt(CH);
+		    	if(Ch==0) {
+		    		return;
+		    	}
+		    	String nameItem=nameItemSale.get(Ch-1);
+		    	String Message="the item ("+sale[indexSale.get(Ch-1)].getIdItem()+"  "+"nameItem"+"["+sale[indexSale.get(Ch-1)].getQuan()+"IS REMOVED";
+		    	int Quan=DeleteItem(nameItem,id);
+		    	int indexNameItem=searchNameItem(nameItem);
+		    	int total=item[indexNameItem].getQuantite()+Quan;
+		    	item[indexNameItem].setQuantite(total);
+		    	JOptionPane.showMessageDialog(null, Message);
+		    }
+		}else {
+			JOptionPane.showMessageDialog(null, "num n exciste pas deja");
+		}
+		
+	}
+	private static int DeleteItem(String nameItem, int id) {
+		// TODO Auto-generated method stub
+		 for(int i=0;i<size2;i++) {
+			 if(id==sale[i].getIdCustomer()) {
+				 if(nameItem.equals(sale[i].getNameItem())) {
+					 if(size2-1==i) {
+						 int quan=sale[i].getQuan();
+						 size2--; 
+						 return quan;
+					 }
+					 int quan=sale[i].getQuan();
+					 sale[i]=sale[i+1];
+					 size2--; 
+					 return quan;
+				 }
+			 }
+		 }
+		return 0;
 	}
 	private static void Addanitemcustomershoppingincart() {
 		int un=-1;
